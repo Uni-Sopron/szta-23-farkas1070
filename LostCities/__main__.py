@@ -1,6 +1,10 @@
-import sys
 
-from LostCities import fib
+
+
+from Drawpile import Drawpile
+
+
 
 if __name__ == "__main__":
-    print(fib())
+    drawpile = Drawpile()
+    print(drawpile.cardarray)
