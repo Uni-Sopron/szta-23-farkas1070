@@ -1,8 +1,12 @@
 from Wagercard import Wagercard
 from Expeditioncard import Expeditioncard
-class Drawpile():
+from Abstractcardpile import CardPile
+import random
+
+
+class Drawpile(CardPile):
     def __init__(self):
-        
+        super().__init__(60)
         self.cardarray = []
         colors = ["green","white","blue","red","yellow"]
         numbers =[2,3,4,5,6,7,8,9,10]
@@ -14,6 +18,15 @@ class Drawpile():
             for j in range(len(numbers)):
                 anothercard = Expeditioncard(colors[i],numbers[j])
                 self.cardarray.append(anothercard)
+
+    
+    
+    def iscardpileempty(self):
+        return len(self.cardarray) == 0
+    
+    def shuffle(self):
+        random.shuffle(self.cardarray)
+
         
                 
                 
