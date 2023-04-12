@@ -5,6 +5,13 @@ from Discardpile import Discardpile
 from Playercardpile import Playercardpile
 class Game():
     def __init__(self, maxrounds:int,roundnum:int) ->None:
+        """The game class. Here every other class will be made and the game itself will be written
+
+        Args:
+            maxrounds (int): 3 max rounds in game
+            roundnum (int): which round are we currently in.
+        """
+        
         self.maxrounds = maxrounds
         self.roundnum = roundnum
         
@@ -33,13 +40,33 @@ class Game():
         print(len(self.Player2.cardarray))
 
     def startgame(self) -> None:
+        """
+        start game function.
+    
+        """
         pass
     def isgameover(self) -> bool:
+        """
+        check if game is over
+
+        Returns:
+            bool: yes if game is over no if its not. game over if round 3 has been completed
+        """
         pass
     def endTurn(self) -> None:
+        """
+        end players turn. this happens when the player draws a card
+        """
         pass
     def Changeturn(self) -> None:
+
+        """
+        change turn
+        """
         pass
     def endgame(self) -> None:
+        """
+        here every scoring things will be calculated
+        """
         pass
     

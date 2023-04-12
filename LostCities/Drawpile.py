@@ -6,6 +6,9 @@ import random
 
 class Drawpile(CardPile):
     def __init__(self) ->None:
+        """
+        init function for drawpile class. this will be the drawpile the players can yhoose from, it has 60 cards in it at the start
+        """
         super().__init__(60)
         self.cardarray = []
         colors = ["green","white","blue","red","yellow"]
@@ -22,9 +25,18 @@ class Drawpile(CardPile):
     
     
     def iscardpileempty(self) -> bool:
+        """
+        check if cardpile is empty, if yes the round is over
+
+        Returns:
+            bool: yes if empty, false if not
+        """
         return len(self.cardarray) == 0
     
     def shuffle(self) -> None:
+        """
+        shuffle the cards in the deck.
+        """
         random.shuffle(self.cardarray)
 
         
