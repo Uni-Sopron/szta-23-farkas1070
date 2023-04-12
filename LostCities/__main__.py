@@ -1,12 +1,9 @@
-
-
-
+from Game import Game
+from Player import Player
 from Drawpile import Drawpile
 
 
 
 if __name__ == "__main__":
-    drawpile = Drawpile()
-    print(drawpile.cardarray)
-    drawpile.shuffle()
-    print(drawpile.cardarray)
+    
+    game = Game(3,1)

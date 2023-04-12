@@ -5,7 +5,7 @@ import random
 
 
 class Drawpile(CardPile):
-    def __init__(self):
+    def __init__(self) ->None:
         super().__init__(60)
         self.cardarray = []
         colors = ["green","white","blue","red","yellow"]
@@ -21,10 +21,10 @@ class Drawpile(CardPile):
 
     
     
-    def iscardpileempty(self):
+    def iscardpileempty(self) -> bool:
         return len(self.cardarray) == 0
     
-    def shuffle(self):
+    def shuffle(self) -> None:
         random.shuffle(self.cardarray)
 
         

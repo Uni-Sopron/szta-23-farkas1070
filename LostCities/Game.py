@@ -1,5 +1,48 @@
+
+from Player import Player
+from Drawpile import Drawpile
+from Discardpile import Discardpile
+from Playercardpile import Playercardpile
 class Game():
-    def __init__(self, maxrounds,roundnum,currentplayerturn):
+    def __init__(self, maxrounds:int,roundnum:int) ->None:
         self.maxrounds = maxrounds
         self.roundnum = roundnum
-        self.currentplayerturn = currentplayerturn
+        
+        name1 = 'marci'
+        age1 = 9
+        name2 = 'sanyi'
+        age2 = 1
+        self.Player1 = Player(name1,1,0)
+        self.Player2 = Player(name2,2,0)
+        self.drawpile = Drawpile()
+        
+
+        self.discardpile1 = Discardpile(1)
+        self.discardpile2 = Discardpile(2)
+        self.discardpile3 = Discardpile(3)
+        self.discardpile4 = Discardpile(4)
+        self.discardpile5 = Discardpile(5)
+        self.playercardpile1=Playercardpile(1)
+        self.playercardpile2=Playercardpile(2)
+        self.playercardpile3=Playercardpile(3)
+        self.playercardpile4=Playercardpile(4)
+        self.playercardpile5=Playercardpile(5)
+        
+        self.Player1.createstartinghand(self.drawpile.cardarray)
+        
+        self.Player2.createstartinghand(self.drawpile.cardarray)
+        print(len(self.drawpile.cardarray))
+        print(len(self.Player1.cardarray))
+        print(len(self.Player2.cardarray))
+
+    def startgame(self) -> None:
+        pass
+    def isgameover(self) -> bool:
+        pass
+    def endTurn(self) -> None:
+        pass
+    def Changeturn(self) -> None:
+        pass
+    def endgame(self) -> None:
+        pass
+    
