@@ -10,10 +10,11 @@ class Player():
         self.cardarray = []
     
     def createstartinghand(self,other:Drawpile) -> None:
-        randomstartingarray= random.choices(other, k = 8)
-        for i in range(len(randomstartingarray)):
-            self.cardarray.append(randomstartingarray[i])
-            other.remove(randomstartingarray[i])
+        randomstartingarray= random.sample(other, k = 8)
+        for card in randomstartingarray:
+            if card in other:
+                self.cardarray.append(card)
+                other.remove(card)
         
         
     

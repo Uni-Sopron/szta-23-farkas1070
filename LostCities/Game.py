@@ -22,11 +22,8 @@ class Game():
         self.discardpile3 = Discardpile(3)
         self.discardpile4 = Discardpile(4)
         self.discardpile5 = Discardpile(5)
-        self.playercardpile1=Playercardpile(1)
-        self.playercardpile2=Playercardpile(2)
-        self.playercardpile3=Playercardpile(3)
-        self.playercardpile4=Playercardpile(4)
-        self.playercardpile5=Playercardpile(5)
+        player1_piles = [Playercardpile(i, 1) for i in range(5)]
+        player2_piles = [Playercardpile(i, 2) for i in range(5)]
         
         self.Player1.createstartinghand(self.drawpile.cardarray)
         
