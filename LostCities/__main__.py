@@ -6,4 +6,4 @@ from Drawpile import Drawpile
 
 if __name__ == "__main__":
     
-    game = Game(3,1)
+    game = Game(3)

@@ -8,6 +8,13 @@ class Drawpile(CardPile):
     def __init__(self) ->None:
         """
         init function for drawpile class. this will be the drawpile the players can yhoose from, it has 60 cards in it at the start
+
+        Member Variables:
+            self.cardarray: the list variale of the cards.
+            colors (list) = the colors that can be used for the cards
+            numbers (list) = the numbers that can be used for the cards
+            
+
         """
         super().__init__(60)
         self.cardarray = []

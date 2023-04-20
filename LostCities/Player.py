@@ -11,6 +11,9 @@ class Player():
             name (str): name of player
             number (int): number of player
             expeditionpoint (int): expeditionpoints of player
+
+        Member variables:
+            self.cardarray (list): the card array of the player
         """
         self.name = name
         self.number = number
@@ -23,6 +26,8 @@ class Player():
 
         Args:
             other (Drawpile): drawpile class instance
+        Member variables:
+            randomstartingarray (list) = the random starting aray that is generated
         """
         randomstartingarray= random.sample(other, k = 8)
         for card in randomstartingarray:
