@@ -28,7 +28,7 @@ class Drawpile(CardPile):
             for j in range(len(numbers)):
                 anothercard = Expeditioncard(colors[i],numbers[j])
                 self.cardarray.append(anothercard)
-
+    
     
     
     def is_cardpile_empty(self) -> bool:

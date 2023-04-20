@@ -19,32 +19,35 @@ class Player():
         self.number = number
         self.expeditionpoint = 0
         self.cardarray = []
-    
-    def create_starting_hand(self,other:Drawpile) -> None:
-        """
-        create starting deck of players from drawpile.
 
-        Args:
-            other (Drawpile): drawpile class instance
-        Member variables:
-            randomstartingarray (list) = the random starting aray that is generated
-        """
-        randomstartingarray= random.sample(other, k = 8)
-        for card in randomstartingarray:
-            if card in other:
-                self.cardarray.append(card)
-                other.remove(card)
-        
-        
-    
-    def draw_card(self,other:Drawpile) -> None:
+    def draw_card_from_drawpile(self,other:Drawpile) -> None:
         """
         Draw random card from drawpile class instance
 
         Args:
-            other (Drawpile): drawpile
+            other (Drawpile): “Card deck to draw cards from”
         """
-        self.cardarray.append(random.choice(other))
+        if len(other) == 0:
+            print("you cannot draw from this pile, because there are no cards to draw from")
+        else:
+            card = random.choice(other)
+            self.cardarray.append(card)
+            other.remove(card)
+
+    def draw_card_from_discardpile(self,other:Discardpile) -> None:
+        """
+        Daw from one of the discardpiles. you can only draw the top card.
+
+        Args:
+            other (Discardpile): “Card deck to draw cards from”
+        """
+        if len(other) == 0:
+            print("you cannot draw from this pile, because there are no cards to draw from")
+        else:
+            card = other[-1]
+            self.cardarray.append(card)
+            other.remove(card)
+            
         
     def discard_card(self,other:Discardpile) -> None:
         """

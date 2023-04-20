@@ -43,15 +43,17 @@ class Game():
         self.discardpile5 = Discardpile(5)
         self.player1_piles = [Playercardpile(i, 1) for i in range(5)]
         self.player2_piles = [Playercardpile(i, 2) for i in range(5)]
+        for _ in range(8):
+            self.Player1.draw_card(self.drawpile.cardarray)
+            self.Player2.draw_card(self.drawpile.cardarray)
         
-        self.Player1.create_starting_hand(self.drawpile.cardarray)
         
-        self.Player2.create_starting_hand(self.drawpile.cardarray)
-        print(len(self.drawpile.cardarray))
+        
         print(len(self.Player1.cardarray))
+        
+        
         print(len(self.Player2.cardarray))
-        print(len(self.player1_piles))
-        print(len(self.player2_piles))
+        print(len(self.drawpile.cardarray))
 
     def start_game(self) -> None:
         """
