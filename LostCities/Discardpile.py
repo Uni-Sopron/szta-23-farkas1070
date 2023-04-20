@@ -13,7 +13,7 @@ class Discardpile(CardPile):
         self.cardarray = []
         self.pilenum = pilenum
         
-    def iscardpileempty(self) -> bool:
+    def is_cardpile_empty(self) -> bool:
         """Check if cardpile is empty
 
         Returns:

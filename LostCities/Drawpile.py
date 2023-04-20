@@ -13,7 +13,7 @@ class Drawpile(CardPile):
             self.cardarray: the list variale of the cards.
             colors (list) = the colors that can be used for the cards
             numbers (list) = the numbers that can be used for the cards
-            
+
 
         """
         super().__init__(60)
@@ -31,7 +31,7 @@ class Drawpile(CardPile):
 
     
     
-    def iscardpileempty(self) -> bool:
+    def is_cardpile_empty(self) -> bool:
         """
         check if cardpile is empty, if yes the round is over
 

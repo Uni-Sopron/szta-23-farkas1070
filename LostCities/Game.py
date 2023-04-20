@@ -31,8 +31,8 @@ class Game():
         
         
         
-        self.Player1 = Player(input("add meg az első játékos nevét"),1,0)
-        self.Player2 = Player(input("add meg a második játékos nevét"),2,0)
+        self.Player1 = Player(input("add meg az első játékos nevét"),1)
+        self.Player2 = Player(input("add meg a második játékos nevét"),2)
         self.drawpile = Drawpile()
         
 
@@ -44,22 +44,22 @@ class Game():
         self.player1_piles = [Playercardpile(i, 1) for i in range(5)]
         self.player2_piles = [Playercardpile(i, 2) for i in range(5)]
         
-        self.Player1.createstartinghand(self.drawpile.cardarray)
+        self.Player1.create_starting_hand(self.drawpile.cardarray)
         
-        self.Player2.createstartinghand(self.drawpile.cardarray)
+        self.Player2.create_starting_hand(self.drawpile.cardarray)
         print(len(self.drawpile.cardarray))
         print(len(self.Player1.cardarray))
         print(len(self.Player2.cardarray))
         print(len(self.player1_piles))
         print(len(self.player2_piles))
 
-    def startgame(self) -> None:
+    def start_game(self) -> None:
         """
         start game function.
     
         """
         pass
-    def isgameover(self) -> bool:
+    def is_game_over(self) -> bool:
         """
         check if game is over
 
@@ -67,18 +67,18 @@ class Game():
             bool: yes if game is over no if its not. game over if round 3 has been completed
         """
         pass
-    def endTurn(self) -> None:
+    def end_turn(self) -> None:
         """
         end players turn. this happens when the player draws a card
         """
         pass
-    def Changeturn(self) -> None:
+    def change_turn(self) -> None:
 
         """
         change turn
         """
         pass
-    def endgame(self) -> None:
+    def end_game(self) -> None:
         """
         here every scoring things will be calculated
         """

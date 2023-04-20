@@ -16,7 +16,7 @@ class CardPile(ABC):
 
     
     @abstractmethod
-    def iscardpileempty(self) -> bool:
+    def is_cardpile_empty(self) -> bool:
         """
         check if cardpile is empty.
 
