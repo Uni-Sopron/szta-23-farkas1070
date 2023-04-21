@@ -33,18 +33,9 @@ class Playercardpile(CardPile):
         """
         return len(self.cardarray) == 0
 
-    def create_Pile(self) -> None:
-        """
-        create the piles.
-        """
-        pass
+    
 
-    def change_wager_card_num(self) -> None:
-        """
-        we have to check how many wagercards are there in every single playercardpile so we chnage number for them here.
-        """
-        pass
-
+    
     def calculate_sum(self) -> int:
         """
         calculate the sum for the playercardpile. this will be integral for the scoring.
@@ -63,8 +54,4 @@ class Playercardpile(CardPile):
 
         pass
 
-    def calculate_8_cardbonus(self) -> None:
-        """
-        if there are 8 cards in a carpile, then you have to add an 8cardbonus to the result sum.
-        """
-        pass
+    
