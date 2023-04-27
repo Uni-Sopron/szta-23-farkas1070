@@ -1,6 +1,4 @@
-from abc import ABC, abstractmethod
-from Wagercard import Wagercard
-from Expeditioncard import Expeditioncard
+from abc import ABC
 
 
 class CardPile(ABC):
@@ -22,4 +20,4 @@ class CardPile(ABC):
         Returns:
             bool: true if empty false if not
         """
-        pass
+        return len(self.cardarray) == 0

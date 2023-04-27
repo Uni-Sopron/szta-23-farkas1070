@@ -12,11 +12,3 @@ class Discardpile(CardPile):
 
         """
         super().__init__(0)
-
-    def is_cardpile_empty(self) -> bool:
-        """Check if cardpile is empty
-
-        Returns:
-            bool: true if empty, false if not
-        """
-        return len(self.cardarray) == 0

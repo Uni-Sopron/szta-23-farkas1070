@@ -1,7 +1,8 @@
-from Wagercard import Wagercard
-from Expeditioncard import Expeditioncard
-from Abstractcardpile import CardPile
 import random
+
+from Abstractcardpile import CardPile
+from Expeditioncard import Expeditioncard
+from Wagercard import Wagercard
 
 
 class Drawpile(CardPile):
@@ -28,15 +29,6 @@ class Drawpile(CardPile):
             for j in range(len(numbers)):
                 anothercard = Expeditioncard(colors[i], numbers[j])
                 self.cardarray.append(anothercard)
-
-    def is_cardpile_empty(self) -> bool:
-        """
-        check if cardpile is empty, if yes the round is over
-
-        Returns:
-            bool: yes if empty, false if not
-        """
-        return len(self.cardarray) == 0
 
     def shuffle(self) -> None:
         """
