@@ -1,4 +1,4 @@
-class Wagercard():
+class Wagercard:
     def __init__(self, color: str) -> None:
         """
         wagercard. this kind of card has only a color attribute
@@ -16,4 +16,4 @@ class Wagercard():
             str: the string we want.
 
         """
-        return f"MyClass object with value {self.color}"
+        return f"Wagercard  with color {self.color}"

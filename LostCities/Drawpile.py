@@ -17,7 +17,7 @@ class Drawpile(CardPile):
 
 
         """
-        super().__init__(60)
+        super().__init__(14)
         self.cardarray = []
         colors = ["green", "white", "blue", "red", "yellow"]
         numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -25,10 +25,12 @@ class Drawpile(CardPile):
             for _ in range(3):
                 card = Wagercard(colors[i])
                 self.cardarray.append(card)
-        for i in range(len(colors)):
-            for j in range(len(numbers)):
-                anothercard = Expeditioncard(colors[i], numbers[j])
+        for i in range(len(numbers)):
+            for j in range(len(colors)):
+                anothercard = Expeditioncard(numbers[i], colors[j])
                 self.cardarray.append(anothercard)
+
+        self.shuffle()
 
     def shuffle(self) -> None:
         """

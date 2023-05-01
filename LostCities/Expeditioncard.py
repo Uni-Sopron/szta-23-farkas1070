@@ -1,4 +1,4 @@
-class Expeditioncard():
+class Expeditioncard:
     def __init__(self, value: int, color: str) -> None:
         """
         init function for expeditioncartd class. this is the card type that has values as well.
@@ -18,4 +18,4 @@ class Expeditioncard():
         Returns:
             str: the str we want
         """
-        return f"MyClass object with color {self.color} and value {self.value}"
+        return f"ExpeditionCard  with value {self.value} and color {self.color}  "

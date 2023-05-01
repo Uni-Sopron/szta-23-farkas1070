@@ -2,7 +2,7 @@ from Abstractcardpile import CardPile
 
 
 class Discardpile(CardPile):
-    def __init__(self) -> None:
+    def __init__(self, color) -> None:
         """
         init function of the discardpile class. This class will have 5 instances of it
 
@@ -11,4 +11,5 @@ class Discardpile(CardPile):
 
 
         """
+        self.color = color
         super().__init__(0)

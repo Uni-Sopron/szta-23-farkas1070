@@ -1,9 +1,8 @@
 from Abstractcardpile import CardPile
+from Wagercard import Wagercard
 
 
 class Playercardpile(CardPile):
-    EXPEDITIONCOST = 20
-
     def __init__(self, playernum: int) -> None:
         """
         playercardpile class. both players have 5 playercardpiles
@@ -25,16 +24,23 @@ class Playercardpile(CardPile):
         self.sum = 0
         self.wagercount = 0
         self.result = 0
+        self.EXPEDITIONCOST = 20
+        self.subtotal = 0
 
-    def calculate_sum(self) -> int:
+    def calculate_sum(self) -> None:
         """
         calculate the sum for the playercardpile. this will be integral for the scoring.
 
         Returns:
             int: the sum of the player's cards
         """
-        # calculation not done yet, I'm just returning the sum in itself so mypy doesn't give errors
-        return self.sum
+
+        for i in range(len(self.cardarray)):
+            # check if the vaiable there is a wagercad
+            if isinstance(self.cardarray[i], Wagercard):
+                self.wagercount += 1
+            else:
+                self.sum += self.cardarray[i].value
 
     def calculate_result(self) -> int:
         """
@@ -43,5 +49,17 @@ class Playercardpile(CardPile):
         Returns:
             int: the result score
         """
-        # calculation not done yet, I'm just returning the result in itself so mypy doesn't give errors
+
+        self.calculate_sum()
+        # we only subtract expeditioncost if there is at least 1 card
+        if len(self.cardarray) > 0:
+            self.subtotal = self.sum - self.EXPEDITIONCOST
+
+        # if thre is 1 wagercard the multiplier is 2x, if there are 2 wagercards the multiplieris 3x etc...
+        wager_multiplier = self.wagercount + 1
+        self.result = self.subtotal * wager_multiplier
+        # 8 card bonus
+        if len(self.cardarray) > 8:
+            self.result += 20
+
         return self.result
