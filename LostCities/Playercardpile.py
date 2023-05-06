@@ -3,14 +3,13 @@ from Wagercard import Wagercard
 
 
 class Playercardpile(CardPile):
-    def __init__(self, playernum: int) -> None:
+    def __init__(self, color: str) -> None:
         """
         playercardpile class. both players have 5 playercardpiles
 
         Args:
             pilenum (int): we have to differentiate them so we give these a number as well.
 
-            playernum (int): the player's number because we also have to differentiate which player'S playercardpile is this
         Member variables:
             self.expeditioncost (int) =the cost of the expedition
             self.sum (int) = the sum of the pile that will be calculated end of each round
@@ -19,8 +18,7 @@ class Playercardpile(CardPile):
 
         """
         super().__init__(0)
-
-        self.playernum = playernum
+        self.color = color
         self.sum = 0
         self.wagercount = 0
         self.result = 0

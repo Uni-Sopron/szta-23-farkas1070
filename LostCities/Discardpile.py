@@ -13,3 +13,11 @@ class Discardpile(CardPile):
         """
         self.color = color
         super().__init__(0)
+
+    def print_last_element(self, index: int) -> None:
+        if len(self.cardarray) == 0:
+            print(f"{self.color} Pile üres, erről nem tudsz húzni")
+        else:
+            print(
+                f" {index} {self.color} oszlopról ezt tudod húzni: {self.cardarray[-1]}"
+            )

@@ -12,33 +12,20 @@ class Game:
         Member variables:
             self.Player1 (Player): player1
             self.Player2 (Player): player2
-            self.drawpile (Drawpile): the drawpile of the game
-            self.discardpile1 (Discardpile) = the first discardpile
-            self.discardpile2 (Discardpile) = the second discardpile
-            self.discardpile3 (Discardpile) = the third discardpile
-            self.discardpile4 (Discardpile) = the fourth discardpile
-            self.discardpile5 (Discardpile) = the fifth discardpile
-            self.player1_piles (array) = player1-s playercardpiles
-            self.player2_piles (array) = player2-s playercardpiles
-            self.current_round (int): which round are we currently in.
             self.MAXROUNDS (int): 3 max rounds in game
-            self.current_player (Player): the current player
+            self.current_round (int): current round variable
 
 
         """
 
         self.MAXROUNDS = 3
         self.current_round = 1
-
         self.Player1 = Player(1)
         self.Player2 = Player(2)
 
         self.setupforround()
 
-        print(self.current_player_piles)
-
         print(len(self.Player1.cardarray))
-
         print(len(self.Player2.cardarray))
         print(len(self.drawpile.cardarray))
         print(self.drawpile.is_cardpile_empty())
@@ -46,10 +33,19 @@ class Game:
     def setupforround(self) -> None:
         """
         this function creates a new instance of every single class for every turn,except the player classes, which there the only modification needed is to clear their cardarrays, and fill them up again with 8 random cards, so there is no code duplication
-        """
 
-        self.player1_piles = [Playercardpile(1) for _ in range(5)]
-        self.player2_piles = [Playercardpile(2) for _ in range(5)]
+        Member variables:
+            self.player1_piles list[Wagercard,ExpeditionCard] : player1's playerpiles
+            self.player2_piles list[Wagercard,ExpeditionCard] : player2's playerpiles
+            self.current_player Union[self.Player1,self.Player2] : current player
+            self.current_player_piles Union[self.player1_piles,self.player2_piles] : current player's playerpiles
+            self.drawpile : drawpile class instance
+            self.discardpiles : 5 of different discardpile class instancs
+
+        """
+        colors = ["green", "white", "blue", "red", "yellow"]
+        self.player1_piles = [Playercardpile(colors[i]) for i in range(5)]
+        self.player2_piles = [Playercardpile(colors[i]) for i in range(5)]
         self.current_player = (
             self.Player1 if self.Player1.age > self.Player2.age else self.Player2
         )
@@ -59,7 +55,7 @@ class Game:
             else self.player2_piles
         )
         self.drawpile = Drawpile()
-        colors = ["green", "white", "blue", "red", "yellow"]
+
         self.discardpiles = [Discardpile(colors[i]) for i in range(5)]
 
         if len(self.Player1.cardarray) != 0 and len(self.Player2.cardarray) != 0:
@@ -72,10 +68,12 @@ class Game:
 
     def draw_card_from_drawpile(self, other: Drawpile, player: Player) -> None:
         """
-        Draw random card from drawpile class instance
+        Drawing from drawpile function
 
         Args:
-            other (Drawpile): “Card deck to draw cards from”
+            other (Drawpile): Drawpile class instance that we get cards from
+            player (Player): player that currently is playing
+
         """
         if len(other) == 0:
             print(
@@ -88,10 +86,12 @@ class Game:
 
     def draw_card_from_discardpile(self, other: Discardpile, player: Player) -> None:
         """
-        Daw from one of the discardpiles. you can only draw the top card.
+        drawing from on of the 5 discardpiles function
+
 
         Args:
-            other (Discardpile): “Card deck to draw cards from”
+            other (Discardpile): Drawpile class instance that we get cards from
+            player (Player): player that currently is playing
         """
         if len(other) == 0:
             print(
@@ -110,28 +110,76 @@ class Game:
             other (Discardpile): the chosen discardpile that the player wants to discard their card onto
             player (Player): The current player
         """
-        choice_str = input(
-            "here are your cards, choose which one you want to discard: "
-        )
-        choice = int(choice_str)
+        print("here are the discard piles:")
+        for i, discard_pile in enumerate(other):
+            if len(discard_pile.cardarray) == 0:
+                print(f"{i+1} {discard_pile.color} Pile üres")
+            else:
+                for i, card in enumerate(discard_pile.cardarray):
+                    print(f"{i} card is: {card}")
+
+        while True:
+            which_discardcolumn = input(
+                "Pick a discardpile from 1 to 5, if you see this again, it means you picked a discardpile, with a color that you don't have, pick another one"
+            )
+            color_to_check = other[int(which_discardcolumn) - 1].color
+            has_color = any(card.color == color_to_check for card in player.cardarray)
+            if has_color:
+                break
+
+        print("your cards: ")
         for i in range(len(player.cardarray)):
             print(f"{i +1}. card: {player.cardarray[i]}")
+
+        choice_str = input("choose which one you want to discard: ")
+        choice = int(choice_str)
+
+        while (
+            other[int(which_discardcolumn) - 1].color
+            != player.cardarray[choice - 1].color
+        ):
+            choice_str = input(
+                "Card's color is not equal to the chosen card's color, pick again: "
+            )
+            choice = int(choice_str)
+
         if choice <= 0 or choice > len(player.cardarray):
             print("bad choice, choose again")
             choice_str = input()
             choice = int(choice_str)
         else:
-            other.cardarray.append((player.cardarray[choice - 1]))
+            other[int(which_discardcolumn) - 1].cardarray.append(
+                (player.cardarray[choice - 1])
+            )
             player.cardarray.pop(choice - 1)
 
     def play_card(self, other: Playercardpile, player: Player) -> None:
         """
-        The function used if the player wants to play their card
+            Plays a card from the player's card pile onto another player's card pile.
 
-        Args:
-            other (Playercardpile): the playercardpile which the player want to put their card on
-            player (Player): the current player
+            Args:
+                other (Playercardpile): The other player's card pile where the card will be played.
+                player (Player): The player who will play the card.
+
+            Returns:
+        None
         """
+        print("here are the player columns:")
+        for i, player_pile in enumerate(other):
+            if len(player_pile.cardarray) == 0:
+                print(f"{i+1} {player_pile.color} Pile üres")
+            else:
+                print(player_pile.cardarray)
+
+        while True:
+            which_playercolumn = input(
+                "Pick a playerpile from 1 to 5, if you see this again, it means you picked a playerpile, with a color that you don't have, pick another one"
+            )
+            color_to_check = other[int(which_playercolumn) - 1].color
+            has_color = any(card.color == color_to_check for card in player.cardarray)
+            if has_color:
+                break
+
         print("your cards: ")
         for i in range(len(player.cardarray)):
             print(f"{i +1}. card: {player.cardarray[i]}")
@@ -139,12 +187,23 @@ class Game:
         choice_str = input("choose which one you want to play ")
         choice = int(choice_str)
 
+        while (
+            other[int(which_playercolumn) - 1].color
+            != player.cardarray[choice - 1].color
+        ):
+            choice_str = input(
+                "Card's color is not equal to the chosen card's color, pick again: "
+            )
+            choice = int(choice_str)
+
         if choice <= 0 or choice > len(player.cardarray):
             print("bad choice, choose again")
             choice_str = input()
             choice = int(choice_str)
         else:
-            other.cardarray.append((player.cardarray[choice - 1]))
+            other[int(which_playercolumn) - 1].cardarray.append(
+                (player.cardarray[choice - 1])
+            )
             player.cardarray.pop(choice - 1)
 
     def is_game_over(self) -> bool:
@@ -171,7 +230,6 @@ class Game:
         """
         here every scoring things will be calculated
         """
-        pass
 
     def end_turn(self) -> None:
         """
@@ -204,8 +262,61 @@ class Game:
         """
         This function will handle each turn for the players.
 
+        Member Variables:
+
         """
-        pass
+        str_choice = input(
+            f"It's your turn {self.current_player.name} what would you like to do? \n 1: Play Card \n 2: discard card "
+        )
+        # playing
+        match int(str_choice):
+            case 1:
+                self.play_card(
+                    self.current_player_piles,
+                    self.current_player,
+                )
+            # discarding
+
+            case 2:
+                self.discard_card(self.discardpiles, self.current_player)
+
+            # bad choice
+
+            case _:
+                str_choice = input(
+                    "bad choice, you only have 2 options, choose again, remember: \n 1:Play Card \n 2: discard card "
+                )
+
+        # drawing a card segment
+
+        print("Here are the top cards from the discard piles:")
+        for i, discard_pile in enumerate(self.discardpiles):
+            discard_pile.print_last_element(i)
+
+        str_choice = input(
+            "Now you need to draw a card, where do you want to draw your card from? \n 1: One of the discard piles \n 2: draw pile."
+        )
+        match int(str_choice):
+            case 1:
+                print("here are the discardpiles again:")
+                for i, discard_pile in enumerate(self.discardpiles):
+                    discard_pile.print_last_element(i)
+
+                discardpile_choice = input("which discard pile card you want?")
+
+                self.draw_card_from_discardpile(
+                    self.discardpiles[int(discardpile_choice) - 1].cardarray,
+                    self.current_player,
+                )
+
+            case 2:
+                self.draw_card_from_drawpile(
+                    self.drawpile.cardarray, self.current_player
+                )
+            case _:
+                str_choice = input(
+                    "bad choice, you only have 2 options, choose again, remember: \n 1: One of the discard piles \n 2: draw pile. "
+                )
 
     def game(self) -> None:
         """
@@ -216,98 +327,7 @@ class Game:
         while self.current_round != self.MAXROUNDS + 1:
             while len(self.drawpile.cardarray) != 40:
                 # playing or discarding segment
-
-                str_choice = input(
-                    f"It's your turn {self.current_player.name} what would you like to do? \n 1: Play Card \n 2: discard card "
-                )
-                choice = int(str_choice)
-
-                # playing
-
-                if choice == 1:
-                    print("here are the player columns:")
-                    for i, player_pile in enumerate(self.current_player_piles):
-                        if len(player_pile.cardarray) == 0:
-                            print(f"Pile {i+1} üres")
-                        else:
-                            print(player_pile.cardarray)
-
-                    which_playercolumn = input(
-                        "Which one would you like to place your card onto? choose between 1-5"
-                    )
-
-                    self.play_card(
-                        self.current_player_piles[int(which_playercolumn) - 1],
-                        self.current_player,
-                    )
-
-                # discarding
-
-                elif choice == 2:
-                    print("here are the discard piles:")
-                    for i, discard_pile in enumerate(self.discardpiles):
-                        if len(discard_pile.cardarray) == 0:
-                            print(f"Pile {i+1} üres")
-                        else:
-                            for card in discard_pile.cardarray:
-                                print(f"{card} card is: {discard_pile.cardarray[card]}")
-
-                    which_discardcolumn = input(
-                        "Which one would you like to discard your card onto? choose between 1-5"
-                    )
-
-                    self.discard_card(
-                        self.discardpiles[int(which_discardcolumn)], self.current_player
-                    )
-
-                # bad choice
-
-                else:
-                    str_choice = input(
-                        "bad choice, you only have 2 options, choose again, remember: \n 1:Play Card \n 2: discard card "
-                    )
-                    choice = int(str_choice)
-
-                # drawing a card segment
-
-                print("Here are the top cards from the discard piles:")
-                for i, discard_pile in enumerate(self.discardpiles):
-                    if len(discard_pile.cardarray) == 0:
-                        print(f"Pile {i+1} üres, erről nem tudsz húzni")
-                    else:
-                        print(f"{i +1} oszlopról ezt tudod húzni: {discard_pile[-1]}")
-
-                str_choice = input(
-                    "Now you need to draw a card, where do you want to draw your card from? \n 1: One of the discard piles \n 2: draw pile."
-                )
-
-                if int(str_choice) == 1:
-                    print("here are the discardpiles again:")
-                    for i, discard_pile in enumerate(self.discardpiles):
-                        if len(discard_pile.cardarray) == 0:
-                            print(f"Pile {i+1} üres, erről nem tudsz húzni")
-                        else:
-                            print(
-                                f"{i + 1} oszlopról ezt tudod húzni: {discard_pile[-1]}"
-                            )
-
-                    discardpile_choice = input("which discard pile card you want?")
-
-                    self.draw_card_from_discardpile(
-                        self.discardpiles[int(discardpile_choice)].cardarray,
-                        self.current_player,
-                    )
-
-                elif int(str_choice) == 2:
-                    self.draw_card_from_drawpile(
-                        self.drawpile.cardarray, self.current_player
-                    )
-                else:
-                    str_choice = input(
-                        "bad choice, you only have 2 options, choose again, remember: \n 1: One of the discard piles \n 2: draw pile. "
-                    )
-                    choice = int(str_choice)
-
+                self.handle_turn()
                 # this is the end of 1 turn, now we change it.
                 self.change_turn()
 
