@@ -17,7 +17,7 @@ class Drawpile(CardPile):
 
 
         """
-        super().__init__(14)
+        super().__init__(60)
         self.cardarray = []
         colors = ["green", "white", "blue", "red", "yellow"]
         numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]

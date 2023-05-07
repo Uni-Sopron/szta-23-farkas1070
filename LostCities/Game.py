@@ -229,7 +229,18 @@ class Game:
     def end_game(self) -> None:
         """
         here every scoring things will be calculated
+
+            Member Variables:
+                winner (Player): the winner player
         """
+        winner = (
+            self.Player1
+            if self.Player1.expeditionpoint > self.Player2.expeditionpoint
+            else self.Player2
+        )
+        print(
+            f"The game is over. the winner is {winner.name}, with {winner.expeditionpoint} points."
+        )
 
     def end_turn(self) -> None:
         """
@@ -263,7 +274,8 @@ class Game:
         This function will handle each turn for the players.
 
         Member Variables:
-
+            str_choice (str) = the choice in string that the user choose to either play or discard a card
+            discardpile_choice (str) = the numbr of the discardpile that the user wantr to discard their card onto
         """
         str_choice = input(
             f"It's your turn {self.current_player.name} what would you like to do? \n 1: Play Card \n 2: discard card "
@@ -325,7 +337,7 @@ class Game:
         """
 
         while self.current_round != self.MAXROUNDS + 1:
-            while len(self.drawpile.cardarray) != 40:
+            while len(self.drawpile.cardarray) != 0:
                 # playing or discarding segment
                 self.handle_turn()
                 # this is the end of 1 turn, now we change it.
