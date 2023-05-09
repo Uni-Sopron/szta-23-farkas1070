@@ -34,5 +34,5 @@ USER appuser
 COPY . .
 
 # Run the executable
-ENTRYPOINT ["python", "-m", "LostCities"]
+ENTRYPOINT ["python", "-m", "lostcities"]
 CMD ["10"]
