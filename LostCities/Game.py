@@ -1,3 +1,5 @@
+import os
+
 from Discardpile import Discardpile
 from Drawpile import Drawpile
 from Player import Player
@@ -5,63 +7,94 @@ from Playercardpile import Playercardpile
 
 
 class Game:
-    def __init__(self) -> None:
-        """The game class. Here every other class will be made and the game itself will be written
-
-
-        Member variables:
-            self.Player1 (Player): player1
-            self.Player2 (Player): player2
-            self.MAXROUNDS (int): 3 max rounds in game
-            self.current_round (int): current round variable
-
-
+    def __init__(
+        self,
+        colors: list[str],
+        MAXROUNDS: int,
+        current_round: int,
+        Player1: Player,
+        Player2: Player,
+        player1_piles: list[Playercardpile],
+        player2_piles: list[Playercardpile],
+        current_player: Player,
+        current_player_piles: list[Playercardpile],
+        drawpile: Drawpile,
+        discardpiles: list[Discardpile],
+    ) -> None:
         """
+        This is init function of the entire game. Here we set up the players, the colors, the current round and the max rounds
 
-        self.MAXROUNDS = 3
-        self.current_round = 1
-        self.Player1 = Player(1)
-        self.Player2 = Player(2)
+        Args:
+            colors (list[str]): The list of colors used to generate the piles
+            MAXROUNDS (int): the number of the max round which is 3
+            current_round (int): the number of the current round
+            Player1 (Player): the first player
+            Player2 (Player): the second player
+            player1_piles (list[Playercardpile]): the first player's piles
+            player2_piles (list[Playercardpile]): the second player's piles
+            current_player (Player): the current player
+            current_player_piles (list[Playercardpile]): the current player's piles
+            drawpile (Drawpile): the drawpile which has 60 cards
+            discardpiles (list[Discardpiles]): the 5 discardpiles in 1 list
+        """
+        self.colors = colors
+        self.MAXROUNDS = MAXROUNDS
+        self.current_round = current_round
+        self.Player1 = Player1
+        self.Player2 = Player2
+        self.player1_piles = player1_piles
+        self.player2_piles = player2_piles
+        self.current_player = current_player
+        self.current_player_piles = current_player_piles
+        self.drawpile = drawpile
+        self.discardpiles = discardpiles
 
-        self.setupforround()
+        for _ in range(8):
+            self.draw_card_from_drawpile(self.drawpile.cardarray, self.Player1)
+            self.draw_card_from_drawpile(self.drawpile.cardarray, self.Player2)
 
         print(len(self.Player1.cardarray))
         print(len(self.Player2.cardarray))
         print(len(self.drawpile.cardarray))
         print(self.drawpile.is_cardpile_empty())
 
+    def clear_screen(self) -> None:
+        """
+        This function is used to clear the terminal, so the game is clearer
+        """
+        os.system("cls" if os.name == "nt" else "clear")
+
     def setupforround(self) -> None:
         """
-        this function creates a new instance of every single class for every turn,except the player classes, which there the only modification needed is to clear their cardarrays, and fill them up again with 8 random cards, so there is no code duplication
+        in this function we start a new round which means that we first clear all the cardarrays in the player piles and the discard piles, then, generate a new drawpile, take the cards from the players(clear their cardarray), and give them new cards.
 
-        Member variables:
-            self.player1_piles list[Wagercard,ExpeditionCard] : player1's playerpiles
-            self.player2_piles list[Wagercard,ExpeditionCard] : player2's playerpiles
-            self.current_player Union[self.Player1,self.Player2] : current player
-            self.current_player_piles Union[self.player1_piles,self.player2_piles] : current player's playerpiles
-            self.drawpile : drawpile class instance
-            self.discardpiles : 5 of different discardpile class instancs
 
         """
-        colors = ["green", "white", "blue", "red", "yellow"]
-        self.player1_piles = [Playercardpile(colors[i]) for i in range(5)]
-        self.player2_piles = [Playercardpile(colors[i]) for i in range(5)]
+        # clear every playerpile and discardpile
+        for i in range(5):
+            self.player1_piles[i].cardarray.clear()
+            self.player2_piles[i].cardarray.clear()
+            self.discardpiles[i].cardarray.clear()
+
+        # setup current player and current player piles
         self.current_player = (
-            self.Player1 if self.Player1.age > self.Player2.age else self.Player2
+            self.Player1
+            if self.Player1.expeditionpoint > self.Player2.expeditionpoint
+            else self.Player2
         )
         self.current_player_piles = (
             self.player1_piles
             if self.current_player == self.Player1
             else self.player2_piles
         )
+        # recreate drawpile
+
         self.drawpile = Drawpile()
+        self.drawpile.clearandfillagain()
 
-        self.discardpiles = [Discardpile(colors[i]) for i in range(5)]
-
-        if len(self.Player1.cardarray) != 0 and len(self.Player2.cardarray) != 0:
-            self.Player1.cardarray.clear()
-            self.Player2.cardarray.clear()
-
+        # clear cardarrays of players reasign cards
+        self.Player1.cardarray.clear()
+        self.Player2.cardarray.clear()
         for _ in range(8):
             self.draw_card_from_drawpile(self.drawpile.cardarray, self.Player1)
             self.draw_card_from_drawpile(self.drawpile.cardarray, self.Player2)
@@ -337,7 +370,12 @@ class Game:
         """
 
         while self.current_round != self.MAXROUNDS + 1:
-            while len(self.drawpile.cardarray) != 0:
+            # because in the first round everything is already setup
+            if self.current_round != 1:
+                print(f"round {self.current_round} begins")
+                self.setupforround()
+
+            while len(self.drawpile.cardarray) != 42:
                 # playing or discarding segment
                 self.handle_turn()
                 # this is the end of 1 turn, now we change it.
@@ -345,7 +383,9 @@ class Game:
 
             if not self.is_game_over():
                 self.end_turn()
-                self.setupforround()
+
                 self.current_round += 1
             else:
                 self.end_game()
+                print(len(self.drawpile.cardarray))
+                break

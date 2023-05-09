@@ -32,6 +32,19 @@ class Drawpile(CardPile):
 
         self.shuffle()
 
+    def clearandfillagain(self) -> None:
+        self.cardarray = []
+        colors = ["green", "white", "blue", "red", "yellow"]
+        numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+        for i in range(len(colors)):
+            for _ in range(3):
+                card = Wagercard(colors[i])
+                self.cardarray.append(card)
+        for i in range(len(numbers)):
+            for j in range(len(colors)):
+                anothercard = Expeditioncard(numbers[i], colors[j])
+                self.cardarray.append(anothercard)
+
     def shuffle(self) -> None:
         """
         shuffle the cards in the deck.
