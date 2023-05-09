@@ -25,7 +25,6 @@ jobs:
 
     - name: Build MkDocs Site
        run: |
-          cd docs
           mkdocs gh-deploy -b main -c
 
     - name: Deploy MkDocs Site
