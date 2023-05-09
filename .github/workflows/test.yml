@@ -38,4 +38,4 @@ jobs:
 
       - name: Smoke test docker image
         run: |
-          docker run --rm LostCities:test 10
+          docker run --rm lostcities:test 10
