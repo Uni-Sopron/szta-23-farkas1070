@@ -53,11 +53,6 @@ class Game:
             self.draw_card_from_drawpile(self.drawpile.cardarray, self.Player1)
             self.draw_card_from_drawpile(self.drawpile.cardarray, self.Player2)
 
-        print(len(self.Player1.cardarray))
-        print(len(self.Player2.cardarray))
-        print(len(self.drawpile.cardarray))
-        print(self.drawpile.is_cardpile_empty())
-
     def clear_screen(self) -> None:
         """
         This function is used to clear the terminal, so the game is clearer
@@ -90,7 +85,6 @@ class Game:
         # recreate drawpile
 
         self.drawpile = Drawpile()
-        self.drawpile.clearandfillagain()
 
         # clear cardarrays of players reasign cards
         self.Player1.cardarray.clear()
