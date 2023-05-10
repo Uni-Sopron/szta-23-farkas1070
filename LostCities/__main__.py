@@ -8,6 +8,7 @@ if __name__ == "__main__":
 
     def startgame() -> None:
         colors = ["green", "white", "blue", "red", "yellow"]
+        numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
         Player1 = Player(1)
         Player2 = Player(2)
         player1_piles = [Playercardpile(colors[i]) for i in range(5)]
@@ -16,7 +17,7 @@ if __name__ == "__main__":
         current_player_piles = (
             player1_piles if current_player == Player1 else player2_piles
         )
-        drawpile = Drawpile()
+        drawpile = Drawpile(colors, numbers)
         discardpiles = [Discardpile(colors[i]) for i in range(5)]
 
         game = Game(

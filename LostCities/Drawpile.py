@@ -6,44 +6,30 @@ from Wagercard import Wagercard
 
 
 class Drawpile(CardPile):
-    def __init__(self) -> None:
+    def __init__(self, colors: list[str], numbers: list[int]) -> None:
         """
         init function for drawpile class. this will be the drawpile the players can yhoose from, it has 60 cards in it at the start
 
-        Member Variables:
-            self.cardarray: the list variale of the cards.
-            colors (list) = the colors that can be used for the cards
-            numbers (list) = the numbers that can be used for the cards
 
-
+        Args:
+            colors (list[str]): the list of colors used to generate the cards
+            numbers (list[int]): the list of numbers used to generate the cards
         """
         super().__init__(60)
+        self.colors = colors
+        self.numbers = numbers
         self.cardarray = []
-        colors = ["green", "white", "blue", "red", "yellow"]
-        numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
-        for i in range(len(colors)):
+
+        for i in range(len(self.colors)):
             for _ in range(3):
-                card = Wagercard(colors[i])
+                card = Wagercard(self.colors[i])
                 self.cardarray.append(card)
-        for i in range(len(numbers)):
-            for j in range(len(colors)):
-                anothercard = Expeditioncard(numbers[i], colors[j])
+        for i in range(len(self.numbers)):
+            for j in range(len(self.colors)):
+                anothercard = Expeditioncard(self.numbers[i], self.colors[j])
                 self.cardarray.append(anothercard)
 
         self.shuffle()
-
-    def clearandfillagain(self) -> None:
-        self.cardarray = []
-        colors = ["green", "white", "blue", "red", "yellow"]
-        numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
-        for i in range(len(colors)):
-            for _ in range(3):
-                card = Wagercard(colors[i])
-                self.cardarray.append(card)
-        for i in range(len(numbers)):
-            for j in range(len(colors)):
-                anothercard = Expeditioncard(numbers[i], colors[j])
-                self.cardarray.append(anothercard)
 
     def shuffle(self) -> None:
         """
