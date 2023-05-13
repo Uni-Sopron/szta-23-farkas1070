@@ -1,4 +1,4 @@
-name: Build and Deploy MkDocs Site
+name: MkDocs Build and Deploy
 
 on:
   push:
@@ -7,29 +7,28 @@ on:
     branches: [ '*' ]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
 
-    - name: Install dependencies
-      run: |
-        pip install mkdocs mkdocs-material
+      - name: Install dependencies
+        run: |
+          pip install mkdocs mkdocs-material
 
-    - name: Build MkDocs Site
-       run: |
-          cd docs
-          mkdocs gh-deploy -b main -c
+      - name: Build MkDocs Site
+        run: |
+          mkdocs build
 
-    - name: Deploy MkDocs Site
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        personal_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site

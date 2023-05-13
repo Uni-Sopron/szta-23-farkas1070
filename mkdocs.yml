@@ -1,5 +1,5 @@
 name: Build and Deploy MkDocs Site
-
+site_name: My MkDocs Site
 on:
   push:
     branches: [ '*' ]
@@ -24,8 +24,8 @@ jobs:
         pip install mkdocs mkdocs-material
 
     - name: Build MkDocs Site
-       run: |
-          mkdocs gh-deploy -b main -c
+      run: |
+        mkdocs gh-deploy -b main -c
 
     - name: Deploy MkDocs Site
       uses: peaceiris/actions-gh-pages@v3
