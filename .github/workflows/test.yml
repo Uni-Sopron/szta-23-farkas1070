@@ -34,8 +34,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build docker image
-        run: docker build . -t lostcities:test
+        run: docker build . -t LostCities:test
 
       - name: Smoke test docker image
         run: |
-          docker run --rm lostcities:test 10
+          docker run --rm LostCities:test 10
