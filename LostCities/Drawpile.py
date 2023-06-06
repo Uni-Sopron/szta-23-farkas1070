@@ -16,17 +16,17 @@ class Drawpile(CardPile):
             numbers (list[int]): the list of numbers used to generate the cards
         """
         super().__init__(60)
-        self.colors = colors
-        self.numbers = numbers
+       
+        
         self.cardarray = []
 
-        for i in range(len(self.colors)):
+        for i in range(len(colors)):
             for _ in range(3):
-                card = Wagercard(self.colors[i])
+                card = Wagercard(colors[i])
                 self.cardarray.append(card)
-        for i in range(len(self.numbers)):
-            for j in range(len(self.colors)):
-                anothercard = Expeditioncard(self.numbers[i], self.colors[j])
+        for i in range(len(numbers)):
+            for j in range(len(colors)):
+                anothercard = Expeditioncard(numbers[i], colors[j])
                 self.cardarray.append(anothercard)
 
         self.shuffle()
