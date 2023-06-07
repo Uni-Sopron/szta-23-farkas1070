@@ -1,4 +1,8 @@
 from abc import ABC
+from typing import List, Union
+
+from Expeditioncard import Expeditioncard
+from Wagercard import Wagercard
 
 
 class CardPile(ABC):
@@ -6,12 +10,11 @@ class CardPile(ABC):
         """
         this is the abstract class for 3 of the different cardpiles.
 
-        Args:
-            cardnum (int): how many cards are there in the carpile.
+        Member Variables:
+            - self.cardarray (list[Union[Wagercard, Expeditioncard]]): list of cards
         """
 
-        
-        self.cardarray = []
+        self.cardarray: List[Union[Wagercard, Expeditioncard]] = []
 
     def is_cardpile_empty(self) -> bool:
         """

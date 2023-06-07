@@ -16,9 +16,6 @@ class Drawpile(CardPile):
             numbers (list[int]): the list of numbers used to generate the cards
         """
         super().__init__()
-       
-        
-        self.cardarray = []
 
         for i in range(len(colors)):
             for _ in range(3):
