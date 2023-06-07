@@ -11,7 +11,7 @@ from Wagercard import Wagercard
 
 
 # test ok
-class TestPlayercardpile(unittest.TestCase):
+class TestPlayercardpile(unittest.TestCase): 
     def setUp(self):
         self.playercardpile = Playercardpile("color")
 
