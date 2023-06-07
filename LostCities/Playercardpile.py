@@ -17,7 +17,7 @@ class Playercardpile(CardPile):
             self.result (int) = the final result in a number of the points in 1 column
 
         """
-        super().__init__(0)
+        super().__init__()
         self.color = color
         self.sum = 0
         self.wagercount = 0

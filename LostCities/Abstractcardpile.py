@@ -2,7 +2,7 @@ from abc import ABC
 
 
 class CardPile(ABC):
-    def __init__(self, cardnum: int) -> None:
+    def __init__(self) -> None:
         """
         this is the abstract class for 3 of the different cardpiles.
 
@@ -10,8 +10,8 @@ class CardPile(ABC):
             cardnum (int): how many cards are there in the carpile.
         """
 
-        self.cardnum = cardnum
-        self.cardarray = [None] * cardnum
+        
+        self.cardarray = []
 
     def is_cardpile_empty(self) -> bool:
         """

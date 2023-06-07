@@ -12,7 +12,7 @@ class Discardpile(CardPile):
 
         """
         self.color = color
-        super().__init__(0)
+        super().__init__()
 
     def print_last_element(self, index: int) -> None:
         if len(self.cardarray) == 0:

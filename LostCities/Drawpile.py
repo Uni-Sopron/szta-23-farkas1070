@@ -15,7 +15,7 @@ class Drawpile(CardPile):
             colors (list[str]): the list of colors used to generate the cards
             numbers (list[int]): the list of numbers used to generate the cards
         """
-        super().__init__(60)
+        super().__init__()
        
         
         self.cardarray = []
@@ -28,6 +28,9 @@ class Drawpile(CardPile):
             for j in range(len(colors)):
                 anothercard = Expeditioncard(numbers[i], colors[j])
                 self.cardarray.append(anothercard)
+
+        print(self.cardarray)
+        print(len(self.cardarray))
 
         self.shuffle()
 

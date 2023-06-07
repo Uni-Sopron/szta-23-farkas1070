@@ -363,7 +363,7 @@ class Game:
                 print(f"round {self.current_round} begins")
                 self.setupforround()
 
-            while len(self.drawpile.cardarray) != 40:
+            while len(self.drawpile.cardarray) != 0:
                 # playing or discarding segment
                 self.handle_turn()
                 # this is the end of 1 turn, now we change it.
