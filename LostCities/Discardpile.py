@@ -7,7 +7,7 @@ class Discardpile(CardPile):
         init function of the discardpile class. This class will have 5 instances of it
 
         Args:
-            pilenum (int): because there are 5 discardpiles we need to differentiate them somehow, so this variable will solve that
+            color (str): color of the discardpile (can be 5 different colors)
 
 
         """

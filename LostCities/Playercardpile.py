@@ -8,7 +8,7 @@ class Playercardpile(CardPile):
         playercardpile class. both players have 5 playercardpiles
 
         Args:
-            pilenum (int): we have to differentiate them so we give these a number as well.
+            color (str): color of the discardpile (can be 5 different colors)
 
         Member variables:
             self.expeditioncost (int) =the cost of the expedition

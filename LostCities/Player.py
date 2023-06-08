@@ -10,12 +10,15 @@ class Player:
         Player class object. there can be only 2 players
 
         Args:
-            name (str): name of player
+
             number (int): number of player
-            expeditionpoint (int): expeditionpoints of player
+
 
         Member variables:
             cardarray (List[Union[Wagercard, Expeditioncard]]): the card array of the player
+            name (str): name of player
+            age (int): age of player (important for the first turn)
+            expeditionpoint (int): expeditionpoints of player
         """
         self.number = number
         self.name = input(f"add meg a neved jatekos {self.number} :")
