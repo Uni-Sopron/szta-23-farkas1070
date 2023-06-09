@@ -1,4 +1,6 @@
 import sys
+import unittest
+from unittest.mock import patch
 
 sys.path.append(
     "C://Users//SIMONMARCI//Desktop//firstangularproject//my-app//szta-23-farkas1070//LostCities"
@@ -10,10 +12,32 @@ from Playercardpile import Playercardpile
 from Wagercard import Wagercard
 
 
-# test ok
-class TestPlayercardpile(unittest.TestCase): 
+class TestPlayercardpile(unittest.TestCase):
     def setUp(self):
         self.playercardpile = Playercardpile("color")
+
+    def test_calculate_result(self):
+        # Add some cards to the playercardpile
+        self.playercardpile.cardarray.append(Wagercard("color"))
+        self.playercardpile.cardarray.append(Wagercard("color"))
+        self.playercardpile.cardarray.append(Wagercard("color"))
+        self.playercardpile.cardarray.append(Wagercard("color"))
+        self.playercardpile.cardarray.append(Wagercard("color"))
+
+        self.playercardpile.cardarray.append(Expeditioncard(10, "color"))
+        self.playercardpile.cardarray.append(Expeditioncard(5, "color"))
+        self.playercardpile.cardarray.append(Expeditioncard(7, "color"))
+
+        # Call the calculate_result() method
+        result = self.playercardpile.calculate_result()
+
+        # Assert that the result is calculated correctly
+        expected_sum = 10 + 5 + 7
+        expected_wager_multiplier = 5 + 1  # 5 wagercards
+        expected_subtotal = expected_sum - self.playercardpile.EXPEDITIONCOST
+        expected_result = expected_subtotal * expected_wager_multiplier
+
+        self.assertEqual(result, expected_result)
 
     def test_calculate_sum(self):
         # Add some cards to the playercardpile
