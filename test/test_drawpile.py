@@ -6,7 +6,7 @@ sys.path.append(
 )
 
 
-from Drawpile import Drawpile
+from LostCities.Drawpile import Drawpile
 
 
 class TestDrawpile(unittest.TestCase):

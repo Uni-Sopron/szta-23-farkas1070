@@ -1,4 +1,4 @@
-from Abstractcardpile import CardPile
+from .Abstractcardpile import CardPile
 
 
 class Discardpile(CardPile):

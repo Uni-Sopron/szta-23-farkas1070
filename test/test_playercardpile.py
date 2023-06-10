@@ -6,9 +6,9 @@ sys.path.append(
 )
 
 
-from Expeditioncard import Expeditioncard
-from Playercardpile import Playercardpile
-from Wagercard import Wagercard
+from LostCities.Expeditioncard import Expeditioncard
+from LostCities.Playercardpile import Playercardpile
+from LostCities.Wagercard import Wagercard
 
 
 class TestPlayercardpile(unittest.TestCase):

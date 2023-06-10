@@ -1,9 +1,9 @@
 import os
 
-from Discardpile import Discardpile
-from Drawpile import Drawpile
-from Player import Player
-from Playercardpile import Playercardpile
+from .Discardpile import Discardpile
+from .Drawpile import Drawpile
+from .Player import Player
+from .Playercardpile import Playercardpile
 
 
 class Game:

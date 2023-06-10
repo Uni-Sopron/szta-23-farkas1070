@@ -1,8 +1,8 @@
 from abc import ABC
 from typing import List, Union
 
-from Expeditioncard import Expeditioncard
-from Wagercard import Wagercard
+from .Expeditioncard import Expeditioncard
+from .Wagercard import Wagercard
 
 
 class CardPile(ABC):

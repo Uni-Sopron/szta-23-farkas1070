@@ -1,5 +1,5 @@
-from Abstractcardpile import CardPile
-from Wagercard import Wagercard
+from .Abstractcardpile import CardPile
+from .Wagercard import Wagercard
 
 
 class Playercardpile(CardPile):

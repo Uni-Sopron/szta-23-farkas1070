@@ -1,8 +1,8 @@
 import random
 
-from Abstractcardpile import CardPile
-from Expeditioncard import Expeditioncard
-from Wagercard import Wagercard
+from .Abstractcardpile import CardPile
+from .Expeditioncard import Expeditioncard
+from .Wagercard import Wagercard
 
 
 class Drawpile(CardPile):
