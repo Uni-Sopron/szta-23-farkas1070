@@ -6,7 +6,7 @@ sys.path.append(
     "C://Users//SIMONMARCI//Desktop//firstangularproject//my-app//szta-23-farkas1070//LostCities"
 )
 
-from Discardpile import Discardpile  # noqa: E402
+from Discardpile import Discardpile  # noqa
 
 
 class TestCardPile(unittest.TestCase):
