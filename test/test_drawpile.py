@@ -6,7 +6,7 @@ sys.path.append(
 )
 
 
-from Drawpile import Drawpile  # noqa: E402
+from Drawpile import Drawpile
 
 
 class TestDrawpile(unittest.TestCase):
