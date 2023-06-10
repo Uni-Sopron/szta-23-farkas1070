@@ -1,11 +1,12 @@
 import sys
+import unittest
 
 sys.path.append(
     "C://Users//SIMONMARCI//Desktop//firstangularproject//my-app//szta-23-farkas1070//LostCities"
 )
-import unittest
 
-from Drawpile import Drawpile
+
+from Drawpile import Drawpile  # noqa: E402
 
 
 class TestDrawpile(unittest.TestCase):

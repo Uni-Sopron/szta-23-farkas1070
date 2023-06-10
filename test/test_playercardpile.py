@@ -1,15 +1,14 @@
 import sys
 import unittest
-from unittest.mock import patch
 
 sys.path.append(
     "C://Users//SIMONMARCI//Desktop//firstangularproject//my-app//szta-23-farkas1070//LostCities"
 )
-import unittest
 
-from Expeditioncard import Expeditioncard
-from Playercardpile import Playercardpile
-from Wagercard import Wagercard
+
+from Expeditioncard import Expeditioncard  # noqa: E402
+from Playercardpile import Playercardpile  # noqa: E402
+from Wagercard import Wagercard  # noqa: E402
 
 
 class TestPlayercardpile(unittest.TestCase):
