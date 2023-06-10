@@ -1,10 +1,5 @@
-import sys
 import unittest
 from unittest.mock import patch
-
-sys.path.append(
-    "C://Users//SIMONMARCI//Desktop//firstangularproject//my-app//szta-23-farkas1070//LostCities"
-)
 
 from LostCities.Discardpile import Discardpile
 
