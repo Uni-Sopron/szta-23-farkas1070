@@ -6,9 +6,9 @@ sys.path.append(
 )
 
 
-from Expeditioncard import Expeditioncard  # noqa
-from Playercardpile import Playercardpile  # noqa
-from Wagercard import Wagercard  # noqa
+from Expeditioncard import Expeditioncard  # noqa: E402
+from Playercardpile import Playercardpile  # noqa: E402
+from Wagercard import Wagercard  # noqa: E402
 
 
 class TestPlayercardpile(unittest.TestCase):
